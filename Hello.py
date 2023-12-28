@@ -13,38 +13,26 @@
 # limitations under the License.
 
 import streamlit as st
-from streamlit.logger import get_logger
+import numpy as np
+import joblib
 
-LOGGER = get_logger(__name__)
+def Predict(b):
+   print(b)
+   
 
 
 def run():
-    st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
-    )
+  st.write("IPL Power Play Score Prediction")
+  with st.form("my_form"):
+    bat_team = st.selectbox('Pick a Batting Team', ['Select Batting Team','Mumbai Indian','Gujarat Titans','Rajasthan Royals','Royal Challengers Bangalore','Delhi Capitals','Chennai Super Kings','Punjab Kings','Sunrisers Hyderabad'])
+    bowl_team=st.selectbox('Pick a Bowling Team', ['Select Bowling Team','Mumbai Indian','Gujarat Titans','Rajasthan Royals','Royal Challengers Bangalore','Delhi Capitals','Chennai Super Kings','Punjab Kings','Sunrisers Hyderabad'])
+    stadium=st.selectbox('Pick a Stadium', ['Select Stadium','MA Chidambaram Stadium, Chepauk, Chennai','Arun Jaitley Stadium, Delhi','M Chinnaswamy Stadium','Narendra Modi Stadium, Ahmedabad','Wankhede Stadium, Mumbai','Dr DY Patil Sports Academy, Mumbai','Punjab Cricket Association IS Bindra Stadium','Sawai Mansingh Stadium','Rajiv Gandhi International Stadium, Uppal'])
+    Bowl_num = int(st.number_input('Enter no. of Bowler'))
+    Bat_num = int(st.number_input('Enter no. of Batter'))
+    inning=st.selectbox('Select Innings',['Select Innings',1,2])
+    arr=[stadium,inning,bat_team,bowl_team,Bat_num,Bowl_num]
+    st.form_submit_button('Predict',on_click=Predict(arr))
 
-    st.write("# Welcome to Streamlit! 👋")
-
-    st.sidebar.success("Select a demo above.")
-
-    st.markdown(
-        """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
-        **👈 Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
-        ### Want to learn more?
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
-    """
-    )
 
 
 if __name__ == "__main__":
